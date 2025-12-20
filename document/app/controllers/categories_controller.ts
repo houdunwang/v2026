@@ -8,7 +8,8 @@ export default class CategoriesController {
   }
 
   async store({ request }: HttpContext) {
-    const payload = await createCategoryValidator.validate(request)
+    const payload = await createCategoryValidator.validate({ request })
+
     const category = await Category.create(payload)
     return category
   }

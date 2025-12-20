@@ -4,9 +4,10 @@ import { compose } from '@adonisjs/core/helpers'
 import { BaseModel, column } from '@adonisjs/lucid/orm'
 import { withAuthFinder } from '@adonisjs/auth/mixins/lucid'
 import { DbAccessTokensProvider } from '@adonisjs/auth/access_tokens'
+import { Role } from '#enums/role'
 
 const AuthFinder = withAuthFinder(() => hash.use('scrypt'), {
-  uids: ['email'],
+  uids: ['name'],
   passwordColumnName: 'password',
 })
 
@@ -15,10 +16,10 @@ export default class User extends compose(BaseModel, AuthFinder) {
   declare id: number
 
   @column()
-  declare fullName: string | null
+  declare name: string
 
   @column()
-  declare email: string
+  declare role: Role
 
   @column({ serializeAs: null })
   declare password: string
