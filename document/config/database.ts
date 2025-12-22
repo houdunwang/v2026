@@ -8,6 +8,9 @@ const dbConfig = defineConfig({
     mysql: {
       client: 'mysql2',
       // debug: env.get('NODE_ENV') === 'development',
+      seeders: {
+        paths: ['./database/seeders/main'],
+      },
       connection: {
         host: env.get('DB_HOST'),
         port: env.get('DB_PORT'),

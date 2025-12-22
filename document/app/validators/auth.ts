@@ -24,5 +24,5 @@ export const registerValidator = FormValidator.rules(() => ({
   name: vine.string().minLength(3).maxLength(20).exists(async (_db, value, _field) => {
     return !await User.query().where('name', value).first()
   }),
-  password: vine.string().minLength(6).maxLength(20),
+  password: vine.string().minLength(6).maxLength(20).confirmed()
 })).fields({ name: '用户名', }).messages({ 'name.database.exists': '用户名已存在' })

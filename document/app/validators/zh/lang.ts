@@ -8,8 +8,8 @@ export const validateMessage = {
   'requiredWithAll': '当 {{fields}} 都存在时，{{field}} 不能为空',
   'requiredWithout': '当 {{fields}} 不存在时，{{field}} 不能为空',
   'requiredWithoutAll': '当 {{fields}} 都不存在时，{{field}} 不能为空',
-
   'database.exists': '{{field}} 不存在',
+  "confirmed": '{{field}} 两次输入不一致',
 
   // 长度验证
   'maxLength': '{{field}} 最多 {{max}} 个字符',
