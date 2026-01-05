@@ -1,20 +1,20 @@
 <script setup lang="ts">
-import type { ButtonProps } from '@nuxt/ui'
+  import type { ButtonProps } from '@nuxt/ui'
 
-const links = ref<ButtonProps[]>([
-  {
-    label: '视频教程',
-    to: '/docs/getting-started',
-    icon: 'i-lucide-square-play'
-  },
-  {
-    label: '晚八点直播',
-    to: '/docs/getting-started/theme/design-system',
-    color: 'neutral',
-    variant: 'subtle',
-    trailingIcon: 'i-lucide-arrow-right'
-  }
-])
+  const links = ref<ButtonProps[]>([
+    {
+      label: '视频教程',
+      to: '/',
+      icon: 'i-lucide-square-play',
+    },
+    {
+      label: '晚八点直播',
+      to: '/',
+      color: 'neutral',
+      variant: 'subtle',
+      trailingIcon: 'i-lucide-arrow-right',
+    },
+  ])
 </script>
 
 <template>
@@ -29,6 +29,6 @@ const links = ref<ButtonProps[]>([
       src="/images/xj-big.jpg"
       alt="App screenshot"
       class="rounded-lg shadow-2xl ring ring-default"
-    >
+    />
   </UPageHero>
 </template>
