@@ -1,14 +1,11 @@
-<script setup lang="ts">
-</script>
+<script setup lang="ts"></script>
 
 <template>
-  <UApp>
+  <UApp :toaster="{ position: 'top-right', expand: false, duration: 1000 }">
     <NuxtLayout>
       <NuxtPage />
     </NuxtLayout>
   </UApp>
 </template>
 
-<style>
-
-</style>
+<style></style>
