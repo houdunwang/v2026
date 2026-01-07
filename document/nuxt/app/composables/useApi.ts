@@ -1,16 +1,32 @@
-import type { UseFetchOptions } from '#app'
-import type { FormSubmitEvent } from '@nuxt/ui'
-const useCustomFetch = () => {
+import { useRequestEvent } from 'nuxt/app'
+import { parseCookies } from 'h3'
+export const useApi = () => {
   const validateStore = useValidateStore()
   const toast = useToast()
   const customFetch = $fetch.create({
     baseURL: 'http://localhost:3333',
+    credentials: 'include',
     headers: {
       'Content-Type': 'application/json',
       Authorization: 'Bearer ' + useCookie('token').value,
     },
-    onRequest({ request }) {
-      console.log(request)
+    onRequest({ request, options }) {
+      // const event = useRequestEvent()
+      // if (import.meta.server && event) {
+      //   try {
+      //     const cookies = parseCookies(event) as Record<string, string>
+      //     const cookieString = Object.entries(cookies)
+      //       .map(([key, value]) => {
+      //         return `${key}=${value}`
+      //       })
+      //       .join(';')
+      //     console.log(cookieString)
+      //     options.headers.set('Cookie', cookieString)
+      //   } catch (error) {
+      //     console.log(error)
+      //   }
+      // }
+      validateStore.reset()
     },
     onResponse({ response }) {
       return response._data
@@ -21,7 +37,7 @@ const useCustomFetch = () => {
           toast.add({
             title: '请登录后操作',
           })
-          navigateTo('/login')
+          navigateTo('/auth/login')
           break
         case 422:
           const errors = response._data.errors
@@ -44,36 +60,4 @@ const useCustomFetch = () => {
     },
   })
   return customFetch
-}
-
-interface IOPtions<T> extends UseFetchOptions<T> {
-  onSuccess?: (data: T) => void
-}
-export const useMutation = <T>(
-  url: string,
-  data: Ref<Record<string, any>>,
-  options: IOPtions<T>
-) => {
-  const res = useFetch(url, {
-    immediate: false,
-    server: false,
-    watch: false,
-    body: data,
-    $fetch: useCustomFetch(),
-    onResponse(res) {
-      if (options.onSuccess) {
-        options.onSuccess(res.response._data as T)
-      }
-      return res.response._data as T
-    },
-    ...options,
-  })
-
-  return {
-    ...res,
-    onSubmit: (payload: FormSubmitEvent<any>) => {
-      data.value = payload.data
-      res.execute()
-    },
-  }
 }

@@ -1,8 +1,9 @@
 <script setup lang="ts">
-  import * as z from 'zod'
-  import type { FormSubmitEvent, AuthFormField } from '@nuxt/ui'
-  import { useMutation } from '~/composables/useApi'
-
+  import type { AuthFormField } from '@nuxt/ui'
+  definePageMeta({
+    middleware: ['guest'],
+  })
+  const validateStore = useValidateStore()
   const fields: AuthFormField[] = [
     {
       name: 'name',
@@ -11,7 +12,7 @@
       placeholder: '请输入帐号',
       required: true,
       size: 'xl',
-      defaultValue: 'admin1111111',
+      defaultValue: 'admin',
     },
     {
       name: 'password',
@@ -24,19 +25,12 @@
     },
   ]
 
-  // const schema = z.object({
-  //   name: z.string('请输入帐号').min(3, '帐号不能少于3个字符'),
-  //   password: z.string('请输入密码').min(8, '密码不能少于8个字符'),
-  // })
-
-  // type Schema = z.output<typeof schema>
-
   const formData = ref({ name: '', password: '' })
-  const { data, onSubmit, pending } = useMutation('/auth/login', formData, {
+  const { login } = useAuth()
+  const { data, onSubmit, pending } = useMutation<{ token: { token: string } }>('/auth/login', {
     method: 'POST',
-    onSuccess: (data) => {
-      //处理登录后续逻辑
-    },
+    body: formData,
+    onSuccess: (data) => login(data.token.token),
   })
 </script>
 
@@ -74,8 +68,17 @@
           <UAlert
             color="error"
             icon="i-lucide-info"
-            title="Error signing in"
-          />
+            v-if="validateStore.errors.length > 0"
+          >
+            <template #description>
+              <div
+                v-for="error in validateStore.errors"
+                :key="error.name"
+              >
+                {{ error.message }}
+              </div>
+            </template>
+          </UAlert>
         </template>
       </UAuthForm>
     </UPageCard>

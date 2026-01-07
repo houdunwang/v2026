@@ -3,7 +3,7 @@ import { createCategoryValidator, updateCategoryValidator } from '#validators/ca
 import type { HttpContext } from '@adonisjs/core/http'
 
 export default class CategoriesController {
-  async index({ }: HttpContext) {
+  async index({}: HttpContext) {
     return await Category.all()
   }
 
