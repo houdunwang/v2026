@@ -25,8 +25,8 @@
     },
   ]
 
-  const formData = ref({ name: '', password: '' })
   const { login } = useAuth()
+  const formData = ref({ name: '', password: '' })
   const { data, onSubmit, pending } = useMutation<{ token: { token: string } }>('/auth/login', {
     method: 'POST',
     body: formData,
@@ -52,7 +52,7 @@
         <template #footer>
           如果没有帐号？
           <ULink
-            to="/auth/register"
+            to="/"
             class="text-primary"
           >
             注册

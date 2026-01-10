@@ -1,13 +1,9 @@
 <script setup lang="ts">
-  const { isLogin, logout } = useAuth()
-  const { data: user } = await useQuery('/user/info', {
-    server: false,
-  })
+  const { isLogin, logout, user } = useAuth()
 </script>
 
 <template>
   <div>
-    {{ user }}
     <UHeader>
       <template #left>
         <UIcon

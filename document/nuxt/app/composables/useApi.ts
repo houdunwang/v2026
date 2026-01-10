@@ -8,9 +8,11 @@ export const useApi = () => {
     credentials: 'include',
     headers: {
       'Content-Type': 'application/json',
-      Authorization: 'Bearer ' + useCookie('token').value,
+      // Authorization: 'Bearer ' + useCookie('token').value,
     },
     onRequest({ request, options }) {
+      options.headers.set('Authorization', 'Bearer ' + useCookie('token').value)
+      // console.log('useCookie("token").value', useCookie('token').value)
       // const event = useRequestEvent()
       // if (import.meta.server && event) {
       //   try {

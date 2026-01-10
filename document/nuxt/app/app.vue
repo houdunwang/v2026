@@ -1,4 +1,7 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+  const { initUser } = useAuth()
+  await initUser()
+</script>
 
 <template>
   <UApp :toaster="{ position: 'top-right', expand: false, duration: 3000 }">
