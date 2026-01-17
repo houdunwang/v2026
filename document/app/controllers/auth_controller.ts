@@ -1,7 +1,7 @@
-import User from '#models/user';
-import type { HttpContext } from '@adonisjs/core/http';
-import BasesController from './bases_controller.js';
-import { loginValidator, registerValidator } from '#validators/auth';
+import User from '#models/user'
+import type { HttpContext } from '@adonisjs/core/http'
+import BasesController from './bases_controller.js'
+import { loginValidator, registerValidator } from '#validators/auth'
 
 export default class AuthController extends BasesController {
   async login({ request, auth }: HttpContext) {
