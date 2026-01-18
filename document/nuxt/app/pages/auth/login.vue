@@ -2,6 +2,8 @@
 import * as z from "zod";
 import type { FormSubmitEvent, AuthFormField } from "@nuxt/ui";
 import { useMutation } from "~/composables/useMutation";
+import type { AuthLoginPost200Response } from "~/types/models/auth-login-post200-response";
+import { useAuth } from "~/composables/useAuth";
 
 const fields: AuthFormField[] = [
   {
@@ -30,21 +32,18 @@ const schema = z.object({
 });
 
 type Schema = z.output<typeof schema>;
-
-const token = useCookie("token", {
-  maxAge: 60 * 60 * 24 * 7,
-});
-
+const { login: onSuccess } = useAuth();
 const formData = ref<Schema>({
   name: "",
   password: "",
 });
-const { pending, onSubmit } = useMutation<any>("/auth/login", {
-  body: formData,
-  onSuccess(data) {
-    token.value = data.token.token;
+const { pending, onSubmit } = useMutation<AuthLoginPost200Response>(
+  "/auth/login",
+  {
+    body: formData,
+    onSuccess,
   },
-});
+);
 </script>
 
 <template>
