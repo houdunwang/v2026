@@ -3,13 +3,13 @@ import type { ButtonProps } from "@nuxt/ui";
 
 const links = ref<ButtonProps[]>([
   {
-    label: "Get started",
-    to: "/docs/getting-started",
+    label: "视频教程",
+    to: "/",
     icon: "i-lucide-square-play",
   },
   {
-    label: "Learn more",
-    to: "/docs/getting-started/theme/design-system",
+    label: "晚八点直播",
+    to: "/",
     color: "neutral",
     variant: "subtle",
     trailingIcon: "i-lucide-arrow-right",
@@ -19,8 +19,8 @@ const links = ref<ButtonProps[]>([
 
 <template>
   <UPageHero
-    title="Ultimate Vue UI library"
-    description="A Nuxt/Vue-integrated UI library providing a rich set of fully-styled, accessible and highly customizable components for building modern web applications."
+    title="后盾人编程"
+    description="后盾人编程是一个专注于全栈技术的编程课程，致力于帮助开发者提升编程技能，构建现代化的 Web 应用。"
     headline="New release"
     orientation="horizontal"
     :links="links"

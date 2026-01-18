@@ -1,23 +1,22 @@
 <script setup lang="ts">
 const features = ref([
   {
-    title: "Icons",
+    title: "持续集成",
     description:
-      "Nuxt UI integrates with Nuxt Icon to access over 200,000+ icons from Iconify.",
+      "随着视频的不断更新，文档也在不断丰富，观看视频时对照文档学习效果更好。",
     icon: "i-lucide-smile",
     to: "/docs/getting-started/integrations/icons",
   },
   {
-    title: "Fonts",
+    title: "内容丰富",
     description:
-      "Nuxt UI integrates with Nuxt Fonts to provide plug-and-play font optimization.",
+      "大部分视频课程都提供了文档，文档内容精炼，摒弃掉啰嗦无用内容。",
     icon: "i-lucide-a-large-small",
     to: "/docs/getting-started/integrations/fonts",
   },
   {
-    title: "Color Mode",
-    description:
-      "Nuxt UI integrates with Nuxt Color Mode to switch between light and dark.",
+    title: "在线直播",
+    description: "大叔晚上8点直播，我们一起写代码，交流讨论。",
     icon: "i-lucide-sun-moon",
     to: "/docs/getting-started/integrations/color-mode",
   },
