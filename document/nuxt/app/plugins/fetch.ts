@@ -9,10 +9,10 @@ export default defineNuxtPlugin((nuxtApp) => {
       //设置token
     },
     onRequestError() {
-      toast.add({
-        title: "网络连接失败",
-      });
-      console.log("请求发生错误");
+      // toast.add({
+      //   title: "网络连接失败",
+      // });
+      // console.log("请求发生错误");
     },
     onResponse(res) {
       if (res.response.ok) {

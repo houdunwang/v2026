@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import * as z from "zod";
 import type { FormSubmitEvent, AuthFormField } from "@nuxt/ui";
+import { useMutation } from "~/composables/useMutation";
 
 const fields: AuthFormField[] = [
   {
@@ -38,19 +39,12 @@ const formData = ref<Schema>({
   name: "",
   password: "",
 });
-const { $api } = useNuxtApp();
-const { data, pending, execute } = useFetch<any>("/auth/login", {
-  method: "POST",
-  immediate: false,
-  server: false,
-  $fetch: $api,
+const { pending, onSubmit } = useMutation<any>("/auth/login", {
   body: formData,
+  onSuccess(data) {
+    token.value = data.token.token;
+  },
 });
-async function onSubmit(payload: FormSubmitEvent<Schema>) {
-  formData.value = payload.data;
-  await execute();
-  token.value = data.value?.token.token;
-}
 </script>
 
 <template>
