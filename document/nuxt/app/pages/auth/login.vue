@@ -2,16 +2,15 @@
 import * as z from "zod";
 import type { FormSubmitEvent, AuthFormField } from "@nuxt/ui";
 
-const toast = useToast();
-
 const fields: AuthFormField[] = [
   {
-    name: "email",
-    type: "email",
+    name: "name",
+    type: "text",
     label: "帐号",
     placeholder: "请输入登录帐号",
     required: true,
     size: "xl",
+    defaultValue: "admin",
   },
   {
     name: "password",
@@ -20,18 +19,37 @@ const fields: AuthFormField[] = [
     placeholder: "请输入登录密码",
     required: true,
     size: "xl",
+    defaultValue: "admin888",
   },
 ];
 
 const schema = z.object({
-  email: z.email("请输入正确的帐号"),
-  password: z.string("请输入登录密码").min(8, "密码不能少于8个字符"),
+  name: z.string("请输入正确的帐号").min(3, "帐号不能少于3个字符"),
+  password: z.string("请输入登录密码").min(5, "密码不能少于8个字符"),
 });
 
 type Schema = z.output<typeof schema>;
 
-function onSubmit(payload: FormSubmitEvent<Schema>) {
-  console.log("Submitted", payload);
+const token = useCookie("token", {
+  maxAge: 60 * 60 * 24 * 7,
+});
+
+const formData = ref<Schema>({
+  name: "",
+  password: "",
+});
+const { $api } = useNuxtApp();
+const { data, pending, execute } = useFetch<any>("/auth/login", {
+  method: "POST",
+  immediate: false,
+  server: false,
+  $fetch: $api,
+  body: formData,
+});
+async function onSubmit(payload: FormSubmitEvent<Schema>) {
+  formData.value = payload.data;
+  await execute();
+  token.value = data.value?.token.token;
 }
 </script>
 
@@ -45,6 +63,7 @@ function onSubmit(payload: FormSubmitEvent<Schema>) {
         icon="i-lucide-user"
         :fields="fields"
         @submit="onSubmit"
+        :loading="pending"
         :submit="{
           label: '登录',
           size: 'xl',

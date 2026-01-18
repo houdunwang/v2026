@@ -1,7 +1,17 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+const token = useCookie("token");
+// const { data } = useNuxtData("categories");
+// onMounted(() => {
+//   setTimeout(() => {
+//     data.value = "后盾人";
+//   }, 2000);
+// });
+</script>
 
 <template>
   <UHeader>
+    <!-- {{ data }} -->
+    {{ token }}
     <template #left>
       <NuxtLink to="/" class="flex items-center gap-2">
         <UIcon name="i-lucide-codepen" size="35" class="text-primary" />

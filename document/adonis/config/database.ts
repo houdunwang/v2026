@@ -7,7 +7,7 @@ const dbConfig = defineConfig({
   connections: {
     mysql: {
       client: 'mysql2',
-      // debug: env.get('NODE_ENV') === 'development',
+      debug: env.get('NODE_ENV') === 'development',
       seeders: {
         paths: ['./database/seeders/main'],
       },
