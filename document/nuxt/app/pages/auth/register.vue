@@ -1,17 +1,17 @@
 <script setup lang="ts">
 import * as z from "zod";
 import type { FormSubmitEvent, AuthFormField } from "@nuxt/ui";
-
-const toast = useToast();
+import type { AuthLoginPost200Response } from "~/types/models/auth-login-post200-response";
 
 const fields: AuthFormField[] = [
   {
-    name: "email",
-    type: "email",
+    name: "name",
+    type: "text",
     label: "帐号",
     placeholder: "请输入登录帐号",
     required: true,
     size: "xl",
+    defaultValue: "houdunren",
   },
   {
     name: "password",
@@ -20,34 +20,37 @@ const fields: AuthFormField[] = [
     placeholder: "请输入登录密码",
     required: true,
     size: "xl",
+    defaultValue: "admin888",
   },
   {
-    name: "password",
+    name: "password_confirmation",
     label: "确认密码",
-    type: "password_confirm",
+    type: "password",
     placeholder: "请输入登录密码",
     required: true,
     size: "xl",
+    defaultValue: "admin888",
   },
 ];
-
-const schema = z.object({
-  email: z.email("请输入正确的帐号"),
-  password: z.string("请输入登录密码").min(8, "密码不能少于8个字符"),
+const { login: onSuccess } = useAuth();
+const formData = ref({
+  name: "",
+  password: "",
+  password_confirmation: "",
 });
-
-type Schema = z.output<typeof schema>;
-
-function onSubmit(payload: FormSubmitEvent<Schema>) {
-  console.log("Submitted", payload);
-}
+const { pending, onSubmit } = useMutation<AuthLoginPost200Response>(
+  "/auth/register",
+  {
+    body: formData,
+    onSuccess,
+  },
+);
 </script>
 
 <template>
   <div class="flex flex-col items-center justify-center gap-4 p-4">
     <UPageCard class="w-full max-w-md shadow-lg lg:mt-32">
       <UAuthForm
-        :schema="schema"
         title="注册"
         description="请输入登录帐号和密码"
         icon="i-lucide-user"
@@ -62,6 +65,9 @@ function onSubmit(payload: FormSubmitEvent<Schema>) {
           如果你已有账号，请先
           <ULink to="#" class="text-primary font-medium">登录</ULink>.
           <ULink to="#" class="text-primary font-medium">首页</ULink>
+        </template>
+        <template #validation>
+          <ValidateMessage />
         </template>
       </UAuthForm>
     </UPageCard>

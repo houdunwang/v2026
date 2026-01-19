@@ -1,11 +1,11 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-  modules: ["@nuxt/eslint", "@nuxt/ui", "@nuxt/fonts"],
+  modules: ["@nuxt/eslint", "@nuxt/ui", "@nuxt/fonts", "@pinia/nuxt"],
   fonts: {
     provider: "local",
   },
   components: [
-    { path: "~/components" },
+    { path: "~/components", pattern: "**/*.vue", pathPrefix: true },
     { path: "~/pages", pattern: "**/components/**/*.vue", pathPrefix: true },
   ],
   pages: {

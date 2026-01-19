@@ -15,7 +15,9 @@
     "@iconify-json/simple-icons": "^1.2.63",
     "@nuxt/fonts": "0.12.1",
     "@nuxt/ui": "^4.3.0",
+    "@pinia/nuxt": "^0.11.3",
     "nuxt": "^4.2.2",
+    "pinia": "^3.0.4",
     "zod": "^4.3.5"
   },
   "devDependencies": {
