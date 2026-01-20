@@ -4,7 +4,13 @@ import type { HttpContext } from '@adonisjs/core/http'
 
 export default class CategoriesController {
   async index({}: HttpContext) {
-    return await Category.all()
+    return await Category.query()
+      .whereNull('parentId')
+      .preload('categories', (query) => {
+        query.select('id', 'parentId', 'title').preload('articles', (query) => {
+          query.select('id', 'title', 'category_id')
+        })
+      })
   }
 
   async store({ request }: HttpContext) {

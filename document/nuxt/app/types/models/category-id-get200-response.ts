@@ -15,52 +15,43 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { CategoryGet200ResponseInnerCategoriesInner } from './category-get200-response-inner-categories-inner';
-// May contain unused imports in some cases
-// @ts-ignore
 import type { Null } from './null';
 
 /**
  * 
  * @export
- * @interface CategoryGet200ResponseInner
+ * @interface CategoryIdGet200Response
  */
-export interface CategoryGet200ResponseInner {
+export interface CategoryIdGet200Response {
     /**
      * 
      * @type {number}
-     * @memberof CategoryGet200ResponseInner
+     * @memberof CategoryIdGet200Response
      */
     'id': number;
     /**
      * 
      * @type {string}
-     * @memberof CategoryGet200ResponseInner
+     * @memberof CategoryIdGet200Response
      */
     'title': string;
     /**
      * 
      * @type {Null}
-     * @memberof CategoryGet200ResponseInner
+     * @memberof CategoryIdGet200Response
      */
     'parentId': Null;
     /**
      * 
      * @type {string}
-     * @memberof CategoryGet200ResponseInner
+     * @memberof CategoryIdGet200Response
      */
     'createdAt': string;
     /**
      * 
      * @type {string}
-     * @memberof CategoryGet200ResponseInner
+     * @memberof CategoryIdGet200Response
      */
     'updatedAt': string;
-    /**
-     * 
-     * @type {Array<CategoryGet200ResponseInnerCategoriesInner>}
-     * @memberof CategoryGet200ResponseInner
-     */
-    'categories': Array<CategoryGet200ResponseInnerCategoriesInner>;
 }
 

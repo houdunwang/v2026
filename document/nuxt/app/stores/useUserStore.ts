@@ -1,11 +1,8 @@
-import { useQuery } from "~/components/useQuery";
 import { FetchKeyEnum } from "~/enum/fetchKey";
 import type { AuthLoginPost200ResponseUser } from "~/types/models/auth-login-post200-response-user";
 
 export const useUserStore = defineStore("user", () => {
   const user = ref<AuthLoginPost200ResponseUser | null | undefined>(null);
-
-  const { $api } = useNuxtApp();
 
   const getUser = async () => {
     const { data } = await useQuery<AuthLoginPost200ResponseUser>(

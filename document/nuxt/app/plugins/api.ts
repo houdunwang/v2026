@@ -25,7 +25,6 @@ export default defineNuxtPlugin({
       },
       onResponse(res) {
         if (res.response.ok) {
-          console.log("操作成功");
         }
         // console.log("onResponse", res);
         // console.log("ddd");

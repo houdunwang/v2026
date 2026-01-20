@@ -5,7 +5,11 @@ export default class CategorySeeder extends BaseSeeder {
   static environment = ['development', 'testing']
 
   async run() {
-    // Write your database queries inside the run method
-    await CategoryFactory.createMany(3)
+    const categories = await CategoryFactory.createMany(5)
+    await Promise.all(
+      categories.map(async (category) => {
+        return category.related('categories').createMany(await CategoryFactory.makeMany(5))
+      })
+    )
   }
 }
