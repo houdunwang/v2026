@@ -1,19 +1,24 @@
-<script setup lang="ts">
-import ArticleCategoryMenu from "./components/ArticleCategoryMenu.vue";
-</script>
+<script setup lang="ts"></script>
 
 <template>
   <div>
     <Header />
+    <ArticleComponentsMobileHeader />
     <UMain>
       <UContainer>
         <UPage>
           <template #left>
             <UPageAside>
-              <ArticleCategoryMenu />
+              <ArticleComponentsArticleList />
             </UPageAside>
           </template>
+
           <slot />
+          <template #right>
+            <div class="hidden lg:block">
+              <ArticleComponentsToc />
+            </div>
+          </template>
         </UPage>
       </UContainer>
     </UMain>

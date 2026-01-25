@@ -7,6 +7,7 @@
       expand: false,
     }"
   >
+    <NuxtLoadingIndicator />
     <NuxtLayout>
       <NuxtPage />
     </NuxtLayout>

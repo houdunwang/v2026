@@ -11,17 +11,27 @@ export default class ArticlesController {
   @inject()
   async store({ request }: HttpContext, article: Article) {
     const payload = await createArticleValidator.validate({ request })
-    return await article.fill(payload).save();
+    return await article.fill(payload).save()
   }
 
   async show({ params }: HttpContext) {
-    return await Article.findOrFail(params.id)
+    const article = await Article.findOrFail(params.id)
+    await article.load('category', (query) => {
+      query.preload('articles', (query) => {
+        query.select('id', 'title', 'categoryId')
+      })
+    })
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        resolve(article)
+      }, 2000)
+    })
   }
 
   async update({ params, request }: HttpContext) {
     const payload = await updateArticleValidator.validate({ request })
     const article = await Article.findOrFail(params.id)
-    return await article.merge(payload).save();
+    return await article.merge(payload).save()
   }
   async destroy({ params }: HttpContext) {
     const article = await Article.findOrFail(params.id)

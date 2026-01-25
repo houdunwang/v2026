@@ -1,55 +1,33 @@
 <script setup lang="ts">
-import type { CategoryGet200ResponseInner } from "~/types/models/category-get200-response-inner";
-
-const props = defineProps<{
-  category: CategoryGet200ResponseInner;
+import type { NavigationMenuItem } from "@nuxt/ui";
+const categoryStore = useCategoryStore();
+const { isMobile = false } = defineProps<{
+  isMobile?: boolean;
 }>();
-const items = ref([
-  ...props.category.categories.map((category) => {
-    return [
-      {
-        label: category.title,
-        icon: "i-lucide-folder",
-      },
-      ...category.articles.map((article) => ({
-        label: article.title,
-        icon: "i-lucide-file-text",
-        onSelect: () => {
-          navigateTo({ name: "article-id", params: { id: article.id } });
-        },
-      })),
-    ];
-  }),
-]);
-const open = ref(false);
+const items = ref<NavigationMenuItem[]>(
+  categoryStore.categories!.map((category) => ({
+    label: category.title,
+    open: isMobile,
+    // to: `/`,
+    children: category.categories?.map((item) => ({
+      label: item.title,
+      // description: "Fully styled and customizable components for N",
+      icon: "i-lucide-house",
+      to: `/article/${item.articles[0]!.id}`,
+    })),
+  })),
+);
 </script>
 
 <template>
-  <UDropdownMenu
-    :items="items"
-    class="mx-2"
-    :modal="false"
-    v-model:open="open"
-    :ui="{
-      content: 'max-h-[calc(100vh-100px)] overflow-y-auto',
-    }"
-  >
-    <UButton
-      color="neutral"
-      variant="link"
-      :label="category.title"
+  <div>
+    <UNavigationMenu
+      :items="items"
+      :orientation="isMobile ? 'vertical' : 'horizontal'"
+      :disable-hover-trigger="true"
       :ui="{
-        label: 'whitespace-nowrap max-w-20',
+        item: isMobile ? undefined : 'truncate max-w-32 mx-2',
       }"
-    >
-      <!-- <div class=""></div> -->
-      <template #trailing>
-        <UIcon
-          name="i-lucide-chevron-down"
-          size="12"
-          :class="[{ 'rotate-180': open }, 'duration-300']"
-        />
-      </template>
-    </UButton>
-  </UDropdownMenu>
+    />
+  </div>
 </template>

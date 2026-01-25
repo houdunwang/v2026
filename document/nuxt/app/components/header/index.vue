@@ -2,7 +2,6 @@
 import type { DropdownMenuItem } from "@nuxt/ui";
 
 const { user, logout } = useAuth();
-const categoryStore = useCategoryStore();
 const items = ref<DropdownMenuItem[]>([
   [
     {
@@ -21,18 +20,17 @@ const items = ref<DropdownMenuItem[]>([
 </script>
 
 <template>
-  <UHeader>
+  <UHeader class="backdrop-blur-none bg-default">
     <template #left>
       <NuxtLink to="/" class="flex items-center gap-2">
         <UIcon name="i-lucide-codepen" size="35" class="text-primary" />
         <div class="font-bold">后盾人编程</div>
       </NuxtLink>
     </template>
-    <HeaderMenu
-      v-for="category in categoryStore.categories"
-      :key="category.id"
-      :category="category"
-    />
+    <HeaderMenu />
+    <template #body>
+      <HeaderMenu :is-mobile="true" />
+    </template>
     <template #right>
       <template v-if="user">
         <UDropdownMenu :items="items">
