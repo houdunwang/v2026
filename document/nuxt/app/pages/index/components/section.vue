@@ -33,7 +33,7 @@ const features = ref([
 }
 :deep([data-slot="features"]) {
   li {
-    @apply bg-gray-100 px-5 py-3 rounded-lg;
+    @apply bg-elevated px-5 py-3 rounded-lg;
   }
 }
 </style>

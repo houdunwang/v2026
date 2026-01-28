@@ -4,6 +4,9 @@ import type { FormSubmitEvent, AuthFormField } from "@nuxt/ui";
 import { useMutation } from "~/composables/useMutation";
 import type { AuthLoginPost200Response } from "~/types/models/auth-login-post200-response";
 import { useAuth } from "~/composables/useAuth";
+definePageMeta({
+  middleware: "guest",
+});
 const fields: AuthFormField[] = [
   {
     name: "name",

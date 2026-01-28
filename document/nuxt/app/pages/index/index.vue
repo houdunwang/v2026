@@ -3,8 +3,4 @@
 <template>
   <IndexComponentsHero />
   <IndexComponentsSection />
-  <IndexComponentsSection />
-  <IndexComponentsSection />
-  <IndexComponentsSection />
-  <IndexComponentsSection />
 </template>

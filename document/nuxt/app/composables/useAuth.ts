@@ -19,7 +19,7 @@ export const useAuth = () => {
   };
 
   const isLogin = computed(() => {
-    // return token.value !== "";
+    return !!userStore.user;
   });
 
   return { login, logout, isLogin, ...storeToRefs(userStore) };

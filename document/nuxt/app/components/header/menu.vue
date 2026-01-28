@@ -8,11 +8,12 @@ const items = ref<NavigationMenuItem[]>(
   categoryStore.categories!.map((category) => ({
     label: category.title,
     open: isMobile,
+    icon: isMobile ? "i-lucide-text-align-end" : undefined,
     // to: `/`,
     children: category.categories?.map((item) => ({
       label: item.title,
       // description: "Fully styled and customizable components for N",
-      icon: "i-lucide-house",
+      icon: isMobile ? undefined : "i-lucide-text-align-end",
       to: `/article/${item.articles[0]!.id}`,
     })),
   })),

@@ -2,7 +2,9 @@ export default defineNuxtPlugin({
   name: "userInfo",
   dependsOn: ["api"],
   async setup(nuxtApp) {
-    useUserStore().getUser();
-    useCategoryStore().getCategory();
+    await Promise.all([
+      useUserStore().getUser(),
+      useCategoryStore().getCategory(),
+    ]);
   },
 });

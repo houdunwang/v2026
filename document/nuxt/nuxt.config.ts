@@ -1,6 +1,16 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-  modules: ["@nuxt/eslint", "@nuxt/ui", "@nuxt/fonts", "@pinia/nuxt", "@nuxt/content", "@nuxtjs/mdc"],
+  modules: [
+    "@nuxt/eslint",
+    "@nuxt/ui",
+    "@nuxt/fonts",
+    "@pinia/nuxt",
+    "@nuxt/content",
+    "@nuxtjs/mdc",
+  ],
+  // experimental: {
+  //   asyncContext: true,
+  // },
   fonts: {
     provider: "local",
   },

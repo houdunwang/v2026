@@ -21,11 +21,12 @@ export default class ArticlesController {
         query.select('id', 'title', 'categoryId')
       })
     })
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        resolve(article)
-      }, 2000)
-    })
+    return article
+    // return new Promise((resolve) => {
+    //   setTimeout(() => {
+    //     resolve(article)
+    //   }, 2000)
+    // })
   }
 
   async update({ params, request }: HttpContext) {

@@ -4,6 +4,7 @@ import type { ArticleIdGet200Response } from "~/types/models/article-id-get200-r
 
 definePageMeta({
   layout: false,
+  middleware: "auth",
 });
 const articleState = useState<ArticleIdGet200Response | undefined>(
   "article",

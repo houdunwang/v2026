@@ -20,7 +20,13 @@ const items = ref<DropdownMenuItem[]>([
 </script>
 
 <template>
-  <UHeader class="backdrop-blur-none bg-default">
+  <UHeader
+    class="border-none pt-6 h-auto"
+    :ui="{
+      container:
+        'border border-default rounded-xl shadow-lg py-2 w-[calc(100%*.7)] hover:shadow-2xl duration-1000',
+    }"
+  >
     <template #left>
       <NuxtLink to="/" class="flex items-center gap-2">
         <UIcon name="i-lucide-codepen" size="35" class="text-primary" />
@@ -32,6 +38,7 @@ const items = ref<DropdownMenuItem[]>([
       <HeaderMenu :is-mobile="true" />
     </template>
     <template #right>
+      <UColorModeSwitch />
       <template v-if="user">
         <UDropdownMenu :items="items">
           <UButton variant="outline" to="/">{{ user.name }}</UButton>

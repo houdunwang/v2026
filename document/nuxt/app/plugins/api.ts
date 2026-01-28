@@ -1,3 +1,4 @@
+import { httpError } from "~/config/httpError";
 import { useValidateStore } from "./../stores/useValidateStore";
 export default defineNuxtPlugin({
   name: "api",
@@ -26,10 +27,22 @@ export default defineNuxtPlugin({
       onResponse(res) {
         if (res.response.ok) {
         }
-        // console.log("onResponse", res);
-        // console.log("ddd");
       },
       onResponseError({ response }) {
+        const { status, statusText } = response;
+        if (import.meta.server || ![422].includes(status || 500)) {
+          nuxtApp.runWithContext(() => {
+            showError({
+              statusCode: status || 500,
+              statusMessage:
+                httpError[status as keyof typeof httpError] ||
+                statusText ||
+                "服务器错误",
+            });
+          });
+          return;
+        }
+
         switch (response.status) {
           case 422:
             const errors = response._data?.errors as {
@@ -39,12 +52,8 @@ export default defineNuxtPlugin({
             errors.forEach((item) => {
               validateStore.setError(item.field, item.message);
             });
-
-            console.log("errors", errors);
-
             break;
         }
-        console.log("onResponseError", response);
       },
     });
     return {
