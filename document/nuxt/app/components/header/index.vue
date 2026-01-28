@@ -7,6 +7,7 @@ const items = ref<DropdownMenuItem[]>([
     {
       label: "内容管理",
       icon: "i-lucide-user",
+      to: "/category",
     },
     {
       label: "退出登录",
@@ -24,12 +25,12 @@ const items = ref<DropdownMenuItem[]>([
     class="border-none pt-6 h-auto"
     :ui="{
       container:
-        'border border-default rounded-xl shadow-lg py-2 w-[calc(100%*.7)] hover:shadow-2xl duration-1000',
+        'border border-default rounded-xl shadow-lg py-2 w-[calc(100%*.8)] lg:w-[calc(100%*.6)] hover:shadow-2xl duration-1000',
     }"
   >
     <template #left>
       <NuxtLink to="/" class="flex items-center gap-2">
-        <UIcon name="i-lucide-codepen" size="35" class="text-primary" />
+        <UIcon name="i-lucide-codepen" size="25" class="text-primary" />
         <div class="font-bold">后盾人编程</div>
       </NuxtLink>
     </template>
@@ -41,7 +42,7 @@ const items = ref<DropdownMenuItem[]>([
       <UColorModeSwitch />
       <template v-if="user">
         <UDropdownMenu :items="items">
-          <UButton variant="outline" to="/">{{ user.name }}</UButton>
+          <UButton variant="outline">{{ user.name }}</UButton>
         </UDropdownMenu>
       </template>
       <template v-else>

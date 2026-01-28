@@ -2,6 +2,9 @@
 import type { NavigationMenuItem } from "@nuxt/ui";
 import type { ArticleIdGet200Response } from "~/types/models/article-id-get200-response";
 const articleState = useState<ArticleIdGet200Response>("article");
+defineEmits<{
+  select: [];
+}>();
 const items = ref<NavigationMenuItem[][]>([
   [
     {
@@ -10,15 +13,8 @@ const items = ref<NavigationMenuItem[][]>([
       open: true,
       children: articleState.value.category.articles.map((article) => ({
         label: article.title,
-        // icon: "i-lucide-house",
         to: `/article/${article.id}`,
       })),
-      //   {
-      //     label: "Introduction",
-      //     description: "Fully styled and customizable components for Nuxt.",
-      //     icon: "i-lucide-house",
-      //   },
-      // ],
     },
   ],
 ]);
@@ -26,6 +22,10 @@ const items = ref<NavigationMenuItem[][]>([
 
 <template>
   <div class="">
-    <UNavigationMenu orientation="vertical" :items="items" class="" />
+    <UNavigationMenu orientation="vertical" :items="items">
+      <template #item-label="{ item }">
+        <div @click="$emit('select')">{{ item.label }}</div>
+      </template>
+    </UNavigationMenu>
   </div>
 </template>

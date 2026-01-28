@@ -2,6 +2,8 @@ import type { AuthLoginPost200Response } from "~/types/models/auth-login-post200
 
 export const useAuth = () => {
   const userStore = useUserStore();
+  const redirectState = useState(RedirectHistory.REDIRECT_HISTORY);
+
   const token = useCookie("token", {
     maxAge: 60 * 60 * 24 * 7,
   });
@@ -10,7 +12,7 @@ export const useAuth = () => {
     token.value = data.token.token;
     await nextTick();
     await userStore.refreshUser();
-    navigateTo("/");
+    navigateTo(redirectState.value || "/");
   };
 
   const logout = () => {

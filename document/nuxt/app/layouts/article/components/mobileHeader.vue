@@ -16,7 +16,9 @@ const tocDrawerOpen = ref(false);
       />
 
       <template #body>
-        <ArticleComponentsArticleList />
+        <ArticleComponentsArticleList
+          @select="() => (articleListDrawerOpen = false)"
+        />
       </template>
     </UDrawer>
     <UDrawer

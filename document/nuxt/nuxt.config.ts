@@ -8,6 +8,9 @@ export default defineNuxtConfig({
     "@nuxt/content",
     "@nuxtjs/mdc",
   ],
+  imports: {
+    dirs: ["~/enum"],
+  },
   // experimental: {
   //   asyncContext: true,
   // },

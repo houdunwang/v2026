@@ -10,7 +10,7 @@ const emit = defineEmits<{
   <UContentToc
     :open="true"
     highlight
-    highlight-color="neutral"
+    highlight-color="primary"
     color="neutral"
     :links="ast?.toc?.links"
   >
