@@ -8,7 +8,7 @@ export default class CategorySeeder extends BaseSeeder {
     const categories = await CategoryFactory.createMany(5)
     await Promise.all(
       categories.map(async (category) => {
-        return category.related('categories').createMany(await CategoryFactory.makeMany(5))
+        return category.related('categories').createMany(await CategoryFactory.makeMany(4))
       })
     )
   }

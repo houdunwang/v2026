@@ -5,7 +5,7 @@
     <AdminComponentsSidebar />
     <UDashboardPanel>
       <AdminComponentsNavbar />
-      <div class="p-6">
+      <div class="p-6 overflow-y-auto">
         <slot />
       </div>
     </UDashboardPanel>

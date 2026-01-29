@@ -1,5 +1,5 @@
-
 export const validateMessage = {
+  'maxRowsRule': '{{field}} 不能超过 {{max}} 个',
   // 基础必填
   'required': '{{field}} 不能为空',
   'requiredIf': '当 {{other}} 为 {{value}} 时，{{field}} 不能为空',
@@ -9,7 +9,7 @@ export const validateMessage = {
   'requiredWithout': '当 {{fields}} 不存在时，{{field}} 不能为空',
   'requiredWithoutAll': '当 {{fields}} 都不存在时，{{field}} 不能为空',
   'database.exists': '{{field}} 不存在',
-  "confirmed": '{{field}} 两次输入不一致',
+  'confirmed': '{{field}} 两次输入不一致',
 
   // 长度验证
   'maxLength': '{{field}} 最多 {{max}} 个字符',
@@ -175,4 +175,3 @@ export const validateFields = {
   departmentName: '部门名称',
   positionName: '职位名称',
 }
-

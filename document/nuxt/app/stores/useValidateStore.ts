@@ -9,5 +9,9 @@ export const useValidateStore = defineStore("validateError", () => {
     errors.value = {};
   };
 
-  return { errors, setError, resetError };
+  const get = (name: string) => {
+    return errors.value[name];
+  };
+
+  return { errors, setError, resetError, get };
 });

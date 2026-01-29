@@ -2,7 +2,7 @@ import type { AuthLoginPost200Response } from "~/types/models/auth-login-post200
 
 export const useAuth = () => {
   const userStore = useUserStore();
-  const redirectState = useState(RedirectHistory.REDIRECT_HISTORY);
+  const redirectState = useCookie(RedirectHistory.REDIRECT_HISTORY);
 
   const token = useCookie("token", {
     maxAge: 60 * 60 * 24 * 7,
@@ -24,5 +24,9 @@ export const useAuth = () => {
     return !!userStore.user;
   });
 
-  return { login, logout, isLogin, ...storeToRefs(userStore) };
+  const isAdmin = computed(() => {
+    return userStore.user && userStore.user.role === "admin";
+  });
+
+  return { login, logout, isLogin, ...storeToRefs(userStore), isAdmin };
 };

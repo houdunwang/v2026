@@ -21,7 +21,7 @@ export default class ArticlesController {
         query.select('id', 'title', 'categoryId')
       })
     })
-    // return article
+    return article
     return new Promise((resolve) => {
       setTimeout(() => {
         resolve(article)

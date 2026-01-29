@@ -16,5 +16,11 @@ export const useCategoryStore = defineStore("category", () => {
     categories.value = data.value;
   };
 
-  return { categories, getCategory };
+  const refresh = async () => {
+    await refreshNuxtData(FetchKeyEnum.category);
+    const { data } = useNuxtData(FetchKeyEnum.category);
+    categories.value = data.value;
+  };
+
+  return { categories, getCategory, refresh };
 });
