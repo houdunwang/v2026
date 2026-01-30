@@ -4,7 +4,7 @@ import Category from '#models/category'
 export const CategoryFactory = factory
   .define(Category, async ({ faker }) => {
     return {
-      title: faker.lorem.sentence()
+      title: faker.lorem.sentence(3),
     }
   })
   .build()

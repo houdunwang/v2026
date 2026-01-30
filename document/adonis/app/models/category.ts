@@ -10,7 +10,10 @@ export default class Category extends BaseModel {
   @column()
   declare title: string
 
-  @column()
+  @column({
+    prepare: (value) => (value == 0 ? null : value),
+    consume: (value) => value ?? 0,
+  })
   declare parentId: number | null
 
   @column.dateTime({ autoCreate: true })

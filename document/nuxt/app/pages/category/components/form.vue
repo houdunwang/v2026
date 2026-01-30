@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { ButtonProps } from "@nuxt/ui";
 import type { CategoryGet200ResponseInnerCategoriesInner } from "~/types/models/category-get200-response-inner-categories-inner";
-const { refresh } = useCategoryStore();
+const { refresh, categories } = useCategoryStore();
 const props = defineProps<{
   button?: ButtonProps;
   category?: Partial<CategoryGet200ResponseInnerCategoriesInner>;
@@ -24,6 +24,13 @@ const { onSubmit } = useMutation(url, {
     open.value = false;
   },
 });
+const items = computed(() => [
+  { label: "一级栏目", value: 0 },
+  ...(categories?.map((item) => ({
+    label: item.title,
+    value: item.id,
+  })) || []),
+]);
 </script>
 
 <template>
@@ -37,9 +44,11 @@ const { onSubmit } = useMutation(url, {
         <UInput v-model="state.title" class="w-full" />
         <FieldError name="title" />
       </UFormField>
+      <UFormField label="栏目名称" name="title">
+        <USelect v-model="state.parentId" :items="items!" class="w-full" />
+        <FieldError name="parentId" />
+      </UFormField>
       <UButton type="submit">保存提交</UButton>
     </UForm>
   </FormModal>
 </template>
-
-<style lang="scss" scoped></style>

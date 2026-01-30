@@ -15,7 +15,7 @@ const open = defineModel<boolean>();
 </script>
 
 <template>
-  <UModal v-model:open="open">
+  <UModal v-model:open="open" :dismissible="false">
     <slot name="button">
       <UButton
         v-bind="props.button"
@@ -25,7 +25,7 @@ const open = defineModel<boolean>();
         :color="props.button?.color || 'neutral'"
       />
     </slot>
-    <template #header>
+    <template #title>
       {{ title }}
     </template>
     <template #body> <slot /> </template>
