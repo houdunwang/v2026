@@ -10,6 +10,9 @@ export default class Category extends BaseModel {
   @column()
   declare title: string
 
+  @column()
+  declare sort: number
+
   @column({
     prepare: (value) => (value == 0 ? null : value),
     consume: (value) => value ?? 0,

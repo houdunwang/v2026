@@ -10,6 +10,7 @@ router
   .resource('category', CategoriesController)
   .apiOnly()
   .use(['store', 'update', 'destroy'], [middleware.admin()])
+router.post('/category/sort', [CategoriesController, 'sort'])
 
 router
   .group(() => {

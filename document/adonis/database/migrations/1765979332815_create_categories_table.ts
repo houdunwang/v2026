@@ -14,6 +14,7 @@ export default class extends BaseSchema {
         .references('id')
         .inTable('categories')
         .onDelete('CASCADE')
+      table.smallint('sort').unsigned().defaultTo(0)
       table.timestamp('created_at')
       table.timestamp('updated_at')
     })

@@ -21,6 +21,7 @@
     "better-sqlite3": "^12.6.2",
     "nuxt": "^4.2.2",
     "pinia": "^3.0.4",
+    "vuedraggable": "^4.1.0",
     "zod": "^4.3.5"
   },
   "devDependencies": {

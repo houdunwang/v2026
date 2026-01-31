@@ -6,10 +6,14 @@ export default class CategoriesController {
   async index({}: HttpContext) {
     return await Category.query()
       .whereNull('parentId')
+      .orderBy('sort', 'asc')
       .preload('categories', (query) => {
-        query.select('id', 'parentId', 'title').preload('articles', (query) => {
-          query.select('id', 'title', 'category_id')
-        })
+        query
+          .select('id', 'parentId', 'title')
+          .orderBy('sort', 'asc')
+          .preload('articles', (query) => {
+            query.select('id', 'title', 'category_id')
+          })
       })
   }
 
@@ -32,5 +36,21 @@ export default class CategoriesController {
   async destroy({ params }: HttpContext) {
     const category = await Category.findOrFail(params.id)
     await category.delete()
+  }
+
+  async sort({ request }: HttpContext) {
+    const categories = request.input('categories')
+    for (let [index, category] of categories.entries()) {
+      const model = await Category.findOrFail(category.id)
+      model.sort = index
+      await model.save()
+      for (let [pos, item] of category.categories.entries()) {
+        const child = await Category.findOrFail(item.id)
+        child.sort = pos
+        await child.save()
+      }
+    }
+
+    console.log(categories)
   }
 }
