@@ -24,7 +24,9 @@ const items = ref<NavigationMenuItem[][]>([
   <div class="">
     <UNavigationMenu orientation="vertical" :items="items">
       <template #item-label="{ item }">
-        <div @click="$emit('select')">{{ item.label }}</div>
+        <div class="w-full">
+          <div @click="$emit('select')" class="truncate">{{ item.label }}</div>
+        </div>
       </template>
     </UNavigationMenu>
   </div>

@@ -11,7 +11,8 @@ export default class ArticlesController {
   @inject()
   async store({ request }: HttpContext, article: Article) {
     const payload = await createArticleValidator.validate({ request })
-    return await article.fill(payload).save()
+    const data = { ...payload, content: `# ${payload.title}` }
+    return await article.fill(data).save()
   }
 
   async show({ params }: HttpContext) {
@@ -22,16 +23,12 @@ export default class ArticlesController {
       })
     })
     return article
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        resolve(article)
-      }, 2000)
-    })
   }
 
   async update({ params, request }: HttpContext) {
     const payload = await updateArticleValidator.validate({ request })
     const article = await Article.findOrFail(params.id)
+    payload.title = payload.content.split('\n')[0].replace('#', '').trim()
     return await article.merge(payload).save()
   }
   async destroy({ params }: HttpContext) {

@@ -28,7 +28,7 @@ const links = ref<ButtonProps[]>([
     <img
       src="/xj-big.jpg"
       alt="App screenshot"
-      class="rounded-lg shadow-2xl ring ring-default"
+      class="rounded-lg shadow-2xl ring ring-default h-72"
     />
   </UPageHero>
 </template>

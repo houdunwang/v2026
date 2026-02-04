@@ -1,9 +1,11 @@
 import router from '@adonisjs/core/services/router'
 import { middleware } from './kernel.js'
+// import UploadsController from '#controllers/uploads_controller'
 const ArticlesController = () => import('#controllers/articles_controller')
 const CategoriesController = () => import('#controllers/categories_controller')
 const UsersController = () => import('#controllers/users_controller')
 const AuthController = () => import('#controllers/auth_controller')
+const UploadsController = () => import('#controllers/uploads_controller')
 router.get('/', async () => 'welcome')
 
 router
@@ -11,6 +13,7 @@ router
   .apiOnly()
   .use(['store', 'update', 'destroy'], [middleware.admin()])
 router.post('/category/sort', [CategoriesController, 'sort'])
+router.post('/upload/image', [UploadsController, 'image'])
 
 router
   .group(() => {

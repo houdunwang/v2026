@@ -11,6 +11,17 @@ export default defineNuxtConfig({
   imports: {
     dirs: ["~/enum"],
   },
+  vite: {
+    optimizeDeps: {
+      include: [
+        "@nuxt/ui > prosemirror-state",
+        "@nuxt/ui > prosemirror-transform",
+        "@nuxt/ui > prosemirror-model",
+        "@nuxt/ui > prosemirror-view",
+        "@nuxt/ui > prosemirror-gapcursor",
+      ],
+    },
+  },
   // experimental: {
   //   asyncContext: true,
   // },
