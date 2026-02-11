@@ -4,7 +4,7 @@ import BasesController from './bases_controller.js'
 import { loginValidator, registerValidator } from '#validators/auth'
 
 export default class AuthController extends BasesController {
-  async login({ response, request, auth }: HttpContext) {
+  async login({ request, auth }: HttpContext) {
     // return response.abort('错误', 403)
     // return new Promise((resolve) => {
     //   setTimeout(() => {

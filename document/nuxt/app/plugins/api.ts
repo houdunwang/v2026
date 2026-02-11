@@ -3,10 +3,10 @@ import { useValidateStore } from "./../stores/useValidateStore";
 export default defineNuxtPlugin({
   name: "api",
   setup(nuxtApp) {
-    const toast = useToast();
     const validateStore = useValidateStore();
+    const config = useRuntimeConfig();
     const $api = $fetch.create({
-      baseURL: "http://localhost:3333",
+      baseURL: config.public.apiBase,
       headers: {
         Accept: "application/json",
         // "Content-Type": "application/json",

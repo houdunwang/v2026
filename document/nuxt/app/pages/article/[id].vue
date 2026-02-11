@@ -26,8 +26,8 @@ astState.value = ast.value;
 <template>
   <NuxtLayout name="article">
     <div class="mt-12">
-      <ContentRenderer v-if="ast" :value="ast" />
-      <!-- <MDCRenderer :body="ast!.body" :data="ast!.body" /> -->
+      <!-- <ContentRenderer v-if="ast" :value="ast" /> -->
+      <MDCRenderer :body="ast!.body" :data="ast!.body" />
     </div>
   </NuxtLayout>
 </template>

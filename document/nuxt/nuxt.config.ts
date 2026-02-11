@@ -8,6 +8,11 @@ export default defineNuxtConfig({
     "@nuxt/content",
     "@nuxtjs/mdc",
   ],
+  runtimeConfig: {
+    public: {
+      apiBase: import.meta.env.NUXT_PUBLIC_API_URL,
+    },
+  },
   imports: {
     dirs: ["~/enum"],
   },
@@ -53,9 +58,9 @@ export default defineNuxtConfig({
 
   css: ["~/assets/css/main.css"],
 
-  routeRules: {
-    "/": { prerender: true },
-  },
+  // routeRules: {
+  //   "/": { prerender: true },
+  // },
 
   compatibilityDate: "2025-01-15",
 

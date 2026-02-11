@@ -15,7 +15,7 @@ const fields: AuthFormField[] = [
     placeholder: "请输入登录帐号",
     required: true,
     size: "xl",
-    defaultValue: "admin",
+    defaultValue: "",
   },
   {
     name: "password",
@@ -24,7 +24,7 @@ const fields: AuthFormField[] = [
     placeholder: "请输入登录密码",
     required: true,
     size: "xl",
-    defaultValue: "admin888",
+    defaultValue: "",
   },
 ];
 
@@ -42,7 +42,6 @@ const formData = ref({
 const { pending, onSubmit } = useMutation<AuthLoginPost200Response>(
   "/auth/login",
   {
-    body: formData,
     onSuccess,
   },
 );
